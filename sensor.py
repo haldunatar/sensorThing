@@ -33,8 +33,9 @@ def distance():
     while GPIO.input(ECHO) == 1:
         stop_time = time.time()
 
-    # Ensure we have valid times before calculating distance
+    # Check if we have valid times before calculating distance
     if start_time == stop_time:
+        print("Echo signal not received.")
         return float('inf')  # Indicates an error or out of range
 
     # Calculate the time difference
@@ -46,12 +47,21 @@ def distance():
     return distance
 
 try:
+    initial_dist = distance()
+    print(f"Initial Distance = {initial_dist:.1f} cm")
+
     while True:
-        dist = distance()
-        if dist == float('inf'):
+        current_dist = distance()
+        if current_dist == float('inf'):
             print("Out of range or error in measurement")
+        elif abs(current_dist - initial_dist) > 1.0:  # Change threshold in cm
+            print(f"Detected! Current Distance = {current_dist:.1f} cm")
         else:
-            print(f"Measured Distance = {dist:.1f} cm")
+            print(f"Measured Distance = {current_dist:.1f} cm")
+        
+        # Update initial distance for continuous detection
+        initial_dist = current_dist
+        
         time.sleep(1)
 
 except KeyboardInterrupt:
