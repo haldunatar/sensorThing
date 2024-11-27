@@ -46,21 +46,18 @@ def distance():
 
     return distance
 
-try:
-    initial_dist = distance()
-    print(f"Initial Distance = {initial_dist:.1f} cm")
+# Threshold distance for detection in cm
+threshold_distance = 25.0
 
+try:
     while True:
         current_dist = distance()
         if current_dist == float('inf'):
             print("Out of range or error in measurement")
-        elif abs(current_dist - initial_dist) > 1.0:  # Change threshold in cm
-            print(f"Detected! Current Distance = {current_dist:.1f} cm")
+        elif current_dist < threshold_distance:
+            print("Detected! Something is within 25 cm")
         else:
             print(f"Measured Distance = {current_dist:.1f} cm")
-        
-        # Update initial distance for continuous detection
-        initial_dist = current_dist
         
         time.sleep(1)
 
