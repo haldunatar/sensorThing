@@ -16,7 +16,7 @@ GPIO.setup(ECHO, GPIO.IN)
 def distance():
     # Ensure the trigger pin is set to LOW
     GPIO.output(TRIG, False)
-    time.sleep(2)  # Allow the sensor to settle
+    time.sleep(0.05)  # Shorter delay to allow sensor to settle
     
     # Send a 10us pulse to trigger the sensor
     GPIO.output(TRIG, True)
@@ -29,13 +29,12 @@ def distance():
         start_time = time.time()
 
     # Record the arrival time of the echo
-    stop_time = time.time()
+    stop_time = start_time
     while GPIO.input(ECHO) == 1:
         stop_time = time.time()
 
     # Check if we have valid times before calculating distance
     if start_time == stop_time:
-        print("Echo signal not received.")
         return float('inf')  # Indicates an error or out of range
 
     # Calculate the time difference
@@ -59,7 +58,8 @@ try:
         else:
             print(f"Measured Distance = {current_dist:.1f} cm")
         
-        time.sleep(1)
+        # Shorter sleep time for faster loop iteration
+        time.sleep(0.1)
 
 except KeyboardInterrupt:
     print("Measurement stopped by user")
