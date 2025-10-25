@@ -3,16 +3,16 @@ import time
 
 # Set up GPIO
 GPIO.setmode(GPIO.BCM)  # Use BCM numbering
-GPIO.setup(17, GPIO.OUT) # Set pin 17 as output
+GPIO.setup(18, GPIO.OUT) # Set pin 18 as output
 
 try:
     while True:
-        GPIO.output(17, GPIO.HIGH)  # Turn ON
-        print("GPIO 17 ON")
+        GPIO.output(18, GPIO.HIGH)  # Turn ON
+        print("GPIO 18 ON")
         time.sleep(5)              # Wait 5 seconds
         
-        GPIO.output(17, GPIO.LOW)   # Turn OFF
-        print("GPIO 17 OFF")
+        GPIO.output(18, GPIO.LOW)   # Turn OFF
+        print("GPIO 18 OFF")
         time.sleep(5)              # Wait 5 seconds
 
 except KeyboardInterrupt:
