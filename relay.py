@@ -7,11 +7,11 @@ GPIO.setup(18, GPIO.OUT) # Set pin 18 as output
 
 try:
     while True:
-        GPIO.output(18, GPIO.HIGH)  # Turn ON
+        GPIO.output(18, GPIO.LOW)  # Turn ON
         print("GPIO 18 ON")
         time.sleep(5)              # Wait 5 seconds
-        
-        GPIO.output(18, GPIO.LOW)   # Turn OFF
+
+        GPIO.output(18, GPIO.HIGH)   # Turn OFF
         print("GPIO 18 OFF")
         time.sleep(5)              # Wait 5 seconds
 
